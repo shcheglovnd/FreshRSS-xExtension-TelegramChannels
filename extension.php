@@ -69,8 +69,12 @@ final class TelegramChannelsExtension extends Minz_Extension {
 		$response = FreshRSS_http_Util::httpGet($previewUrl, $feed->cacheFilename($previewUrl), 'html', $feed->attributes(), $feed->curlOptions());
 		$body = $response['body'];
 		if ($response['fail'] || $body === '') {
-			$status = abs($response['status']);
-			throw new FreshRSS_Feed_Exception(_t('ext.telegram_channels.error.fetch', $previewUrl, $status > 0 ? 'HTTP ' . $status : $response['error']), $status);
+			// `status` and `error` are only returned since FreshRSS 1.29
+			$status = $response['status'] ?? 0;
+			$status = is_int($status) ? abs($status) : 0;
+			$error = $response['error'] ?? '';
+			throw new FreshRSS_Feed_Exception(_t('ext.telegram_channels.error.fetch', $previewUrl,
+				$status > 0 ? 'HTTP ' . $status : (is_string($error) && $error !== '' ? $error : '?')), $status);
 		}
 		$data = TelegramChannelsPage::parse($body, $channel, $this->labels());
 		if ($data === null) {
@@ -157,12 +161,15 @@ final class TelegramChannelsExtension extends Minz_Extension {
 		}
 	}
 
+	// getUserConfigurationValue() rather than the typed getters, which need FreshRSS 1.29
 	public function ttlMinutes(): int {
-		return $this->getUserConfigurationInt('ttl_minutes') ?? self::TTL_DEFAULT_MINUTES;
+		$minutes = $this->getUserConfigurationValue('ttl_minutes');
+		return is_int($minutes) ? $minutes : self::TTL_DEFAULT_MINUTES;
 	}
 
 	public function rsshubEnabled(): bool {
-		return $this->getUserConfigurationBool('rsshub') ?? true;
+		$enabled = $this->getUserConfigurationValue('rsshub');
+		return is_bool($enabled) ? $enabled : true;
 	}
 
 	/** @return array<string,string> labels for generated content, in the user’s language */

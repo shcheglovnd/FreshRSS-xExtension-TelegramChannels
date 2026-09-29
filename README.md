@@ -36,7 +36,7 @@ RSSHub means running another service. This extension needs nothing but FreshRSS 
 3. In FreshRSS: *Settings → Extensions*, then enable **Telegram Channels**. It is a per-user
    extension.
 
-Requires FreshRSS **1.28 or newer** (developed and tested on 1.30.0).
+Requires FreshRSS **1.28 or newer** (tested on 1.28.1 and 1.30.0).
 
 ## Use
 
