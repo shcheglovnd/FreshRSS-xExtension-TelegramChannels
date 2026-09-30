@@ -2,7 +2,7 @@
 	"name": "Telegram Channels",
 	"author": "shcheglovnd",
 	"description": "Follow public Telegram channels directly — no RSSHub or other proxy. Reads the channel’s public web preview (t.me/s/…), with all photos of a post.",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"entrypoint": "TelegramChannels",
 	"type": "user"
 }

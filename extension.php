@@ -78,7 +78,14 @@ final class TelegramChannelsExtension extends Minz_Extension {
 		}
 		$data = TelegramChannelsPage::parse($body, $channel, $this->labels());
 		if ($data === null) {
-			throw new FreshRSS_Feed_Exception(_t('ext.telegram_channels.error.not_a_channel', $channel, $previewUrl));
+			// Do not let FreshRSS’s cache serve this page again at the next refresh
+			$cache = $feed->cacheFilename($previewUrl);
+			if (is_file($cache)) {
+				unlink($cache);
+			}
+			// Now and then Telegram answers t.me/s/… with its “View @channel” app page instead of the preview
+			$reason = str_contains($body, 'Telegram: View @') ? 'no_preview' : 'not_a_channel';
+			throw new FreshRSS_Feed_Exception(_t('ext.telegram_channels.error.' . $reason, $channel, $previewUrl));
 		}
 
 		$file = \SimplePie\File::fromResponse(new \SimplePie\HTTP\RawTextResponse(TelegramChannelsRss::build($data), $url));

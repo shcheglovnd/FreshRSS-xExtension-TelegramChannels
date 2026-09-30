@@ -31,6 +31,7 @@ return [
 		],
 		'error' => [
 			'fetch' => 'Telegram: could not load %s (%s)',
+			'no_preview' => 'Telegram served no preview of “%s” this time — it does so now and then; FreshRSS will try again at the next refresh (%s)',
 			'not_a_channel' => 'Telegram: “%s” is not a public channel, or it has no public preview (%s)',
 		],
 	],

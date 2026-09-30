@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 — 2026-09-29
+
+* When Telegram answers with its “View @channel” app page instead of the preview (it does so now and then), the feed reports a temporary “no preview this time” error instead of “not a public channel”, and the page is not kept in FreshRSS’s cache, so the next refresh fetches afresh.
+
 ## 0.1.0 — 2026-09-29
 
 First release.
