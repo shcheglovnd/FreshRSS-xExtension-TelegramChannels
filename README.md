@@ -29,10 +29,12 @@ RSSHub means running another service. This extension needs nothing but FreshRSS 
 
 ## Install
 
-1. Download this repository: *Code → Download ZIP*, or
-   `git clone https://github.com/shcheglovnd/xExtension-TelegramChannels.git`.
-2. Put the `xExtension-TelegramChannels` folder into the `extensions/` directory of your FreshRSS.
-   With the official Docker image that is the volume mounted at `/var/www/FreshRSS/extensions`.
+1. Download this repository into a folder named `xExtension-TelegramChannels`, either
+   `git clone https://github.com/shcheglovnd/FreshRSS-xExtension-TelegramChannels.git xExtension-TelegramChannels`, or
+   *Code → Download ZIP* and rename the extracted folder. FreshRSS accepts any folder name;
+   `xExtension-…` is just the convention.
+2. Put that folder into the `extensions/` directory of your FreshRSS. With the official Docker
+   image that is the volume mounted at `/var/www/FreshRSS/extensions`.
 3. In FreshRSS: *Settings → Extensions*, then enable **Telegram Channels**. It is a per-user
    extension.
 
